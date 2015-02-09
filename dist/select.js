@@ -816,6 +816,7 @@
     }
 
     function _findApproxDupe(haystack, needle) {
+      haystack = angular.isArray(haystack) ? haystack : [haystack];
       var tempArr = angular.copy(haystack);
       var dupeIndex = -1;
       for (var i = 0; i <tempArr.length; i++) {
@@ -828,7 +829,9 @@
         // handle the object tagging implementation
         } else {
           var mockObj = tempArr[i];
-          mockObj.isTag = true;
+          if (mockObj) {
+            mockObj.isTag = true;
+          }
           if ( angular.equals(mockObj, needle) ) {
             dupeIndex = i;
           }
